@@ -9,7 +9,6 @@ if(!isset($_SESSION['nickname']))           // S'il n'y a pas d'utilisateur conn
     </script>
     <?php
 }
-include "../config.php"
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +30,7 @@ include "../config.php"
         <link rel="stylesheet" href="../style.css">
 
         <?php // Titre principal et icône de la page ?>
-        <title> <?php echo $challenge1['challenge'] ?> </title>
+        <flag>Challenge n°5</flag>
         <link rel="icon" type="image/png" sizes="16x16" href="../images/deathstarw.png">
     </head>
 
@@ -49,11 +48,11 @@ include "../config.php"
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../index">Home</a></li>
                         <li class="breadcrumb-item"><a href="../course">Courses</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> <?php echo $challenge1['title'] ?> </li>
+                        <li class="breadcrumb-item active" aria-current="page">Exploit a vulnerability: Challenge n°5</li>
                     </ol>
                 </nav>
             </div> 
-            <h1> <?php echo $challenge1['title'] ?> </h1>
+            <h1>Exploit a vulnerability: Challenge n°5</h1>
             </br>
             </br>
         </div>
@@ -65,25 +64,40 @@ include "../config.php"
                 <div class="group col-sm-7">
                     <p style="font-size: 18px; text-align: justify; color: white">
                         </br>
-                        Welcome to this first challenge!
+                        Welcome to the fifth challenge!
                         </br>
                         </br>
-                        Here is a vulnerable machine with a password inside.
+                        Here is a vulnerable machine with 1 flag inside.
                         </br>
                         </br>
-                        The goal: exploit a vulnerability in the machine and find the password to get <strong> 10 points! </strong>
-                        </br>
-                        </br>
-                        To download the vulnerable virtual machine, click on the following link: <a href="../../vm/Challenge1.ova"> Challenge1.ova </a>
-                        </br>
+                        The goal: find and steal the admin cookie and get the flags to get <strong> 10 points! </strong>
+                        </br> 
                         </br>
                     </p>
-                    <form action="challenge1" method="POST">
+                    <form action="challenge5" method="POST">
                         <div class="container">
                             <div class="form-row justify-content-center">
                                 <div class="form-group col-sm-5">
-                                    <label for="password" style="color:rgba(55,150,255)">Password for Challenge n°1 :</label>
-                                    <input type="password" class="form-control" id="password" name="password" style="border:2px solid rgba(55,150,255);background-color:#2d3645;color:white" required>
+                                <!--
+                                    flag:<br/>
+                                    <input type="text" name="titre" value="" />
+                                </div><br/>
+                                <div>
+                                    Message:<br/>
+                                    <textarea name="message" rows="3" cols="50"></textarea>
+                                </div>
+                                <div>
+                                    <input type="submit" value="send" />
+                                </div>
+                            </form><br/><br/>
+                            <div>
+                                <div>Posted messages:</div><br/>
+                                <span><b>Welcome</b></span><br/>
+                                <span>N'hésitez pas à me laisser un message / Feel free to leave a message</span><br/><hr/>
+                            </div>
+                                -->
+                                    <label for= "flag" style="color:rgba(55,150,255)">Flag :</label>
+                                    <input type="flag" class="form-control" id="flag" name="flag" style="border:2px solid rgba(55,150,255);background-color:#2d3645;color:white" required> 
                                 </div>
                             </div>
                             <div class="form-row justify-content-center">
@@ -105,19 +119,19 @@ include "../config.php"
                             if(password_verify($password, $data_psswd['password']))
                             {
                                 $user = $_SESSION['nickname'];
-                                $result3 = $db->prepare('SELECT point, challenge1 FROM user WHERE nickname = :nickname');
+                                $result3 = $db->prepare('SELECT point, challenge2 FROM user WHERE nickname = :nickname');
                                 $result3->execute(array('nickname' => $user));
                                 $data_name = $result3->fetch();
-                                if($data_name['challenge1'] == 0)
+                                if($data_name['challenge2'] == 0)
                                 {
-                                    $score = $data_name['point'] + 10;
-                                    $req = $db->prepare('UPDATE user SET point =:point, challenge1 =:challenge1 WHERE nickname = :nickname');
-                                    $req->execute(array('point' => $score, 'challenge1' => 1, 'nickname' => $user));
+                                    $score = $data_name['point'] + 20;
+                                    $req = $db->prepare('UPDATE user SET point =:point, challenge2 =:challenge2 WHERE nickname = :nickname');
+                                    $req->execute(array('point' => $score, 'challenge2' => 1, 'nickname' => $user));
                                     ?>
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <div class="group col-sm-0">
-                                                &#9989; <strong style="color: rgba(0,176,0);"> Bravo ! +10 points ! </strong> &#9989; 
+                                                &#9989; <strong style="color: rgba(0,176,0);"> Bravo ! +20 points ! </strong> &#9989; 
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +143,7 @@ include "../config.php"
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <div class="group col-sm-0">
-                                                &#10060; <strong style="color: red;"> Challenge already validated! </strong> &#10060;
+                                                &#10060; <strong style="color: red;"> Challenge already validated ! </strong> &#10060;
                                             </div>
                                         </div>
                                     </div>
@@ -161,3 +175,5 @@ include "../config.php"
     require_once('footerCourses.php'); 
     ?>
 </html>
+
+

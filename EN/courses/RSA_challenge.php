@@ -9,6 +9,7 @@ if(!isset($_SESSION['nickname']))           // S'il n'y a pas d'utilisateur conn
     </script>
     <?php
 }
+//Include configuration des langues
 include "../config.php"
 ?>
 
@@ -16,23 +17,11 @@ include "../config.php"
 <html lang="fr">
     <?php // En-tête de la page ?>
     <head>
-        <?php // Balises meta responsive ?>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale-1">
-
-        <?php // Bootstrap CSS ?>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        
-        <?php // jQuery et Bootstrap JS ?>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <?php // Feuille de style ?>
-        <link rel="stylesheet" href="../style.css">
-
-        <?php // Titre principal et icône de la page ?>
-        <title> <?php echo $challenge1['challenge'] ?> </title>
-        <link rel="icon" type="image/png" sizes="16x16" href="../images/deathstarw.png">
+        <?php 
+        //Include header
+        include "../../header.php" 
+        ?>
+        <title><?php echo $rsa_chall['challenge'] ?></title>
     </head>
 
     <?php // Corps de la page ?>
@@ -47,13 +36,13 @@ include "../config.php"
             <div class="breadcrumb">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../index">Home</a></li>
-                        <li class="breadcrumb-item"><a href="../course">Courses</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> <?php echo $challenge1['title'] ?> </li>
+                    <li class="breadcrumb-item"><a href="../index"><?php echo $menu['home'] ?></a></li>
+                        <li class="breadcrumb-item"><a href="../course"><?php echo $menu['courses'] ?></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $rsa_chall['challenge'] ?></li>
                     </ol>
                 </nav>
             </div> 
-            <h1> <?php echo $challenge1['title'] ?> </h1>
+            <h1> <?php echo $rsa_chall['title'] ?> </h1>
             </br>
             </br>
         </div>
@@ -65,30 +54,29 @@ include "../config.php"
                 <div class="group col-sm-7">
                     <p style="font-size: 18px; text-align: justify; color: white">
                         </br>
-                        Welcome to this first challenge!
+                        </br>
+                        <?php echo $rsa_chall['description'] ?>
                         </br>
                         </br>
-                        Here is a vulnerable machine with a password inside.
+                        <?php echo $rsa_chall['goal'] ?> <strong> 15 points! </strong>
                         </br>
                         </br>
-                        The goal: exploit a vulnerability in the machine and find the password to get <strong> 10 points! </strong>
-                        </br>
-                        </br>
-                        To download the vulnerable virtual machine, click on the following link: <a href="../../vm/Challenge1.ova"> Challenge1.ova </a>
+
                         </br>
                         </br>
                     </p>
+                    <?php // TO DO WHEN CIPHER IS IN DOCKER ?>
                     <form action="challenge1" method="POST">
                         <div class="container">
                             <div class="form-row justify-content-center">
                                 <div class="form-group col-sm-5">
-                                    <label for="password" style="color:rgba(55,150,255)">Password for Challenge n°1 :</label>
+                                    <label for="password" style="color:rgba(55,150,255)"><?php echo $challenge['password'] ?></label>
                                     <input type="password" class="form-control" id="password" name="password" style="border:2px solid rgba(55,150,255);background-color:#2d3645;color:white" required>
                                 </div>
                             </div>
                             <div class="form-row justify-content-center">
                                 <div class="form-group col-sm-0">
-                                    <button type="submit" class="btn btn-primary" id="submit" name="submit">Confirm</button>
+                                    <button type="submit" class="btn btn-primary" id="submit" name="submit"><?php echo $challenge['confirm'] ?></button>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +105,7 @@ include "../config.php"
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <div class="group col-sm-0">
-                                                &#9989; <strong style="color: rgba(0,176,0);"> Bravo ! +10 points ! </strong> &#9989; 
+                                                &#9989; <strong style="color: rgba(0,176,0);"> <?php echo $challenge['bravo'] ?> +10 points ! </strong> &#9989; 
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +117,7 @@ include "../config.php"
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <div class="group col-sm-0">
-                                                &#10060; <strong style="color: red;"> Challenge already validated! </strong> &#10060;
+                                                &#10060; <strong style="color: red;"> <?php echo $challenge['already_val'] ?> </strong> &#10060;
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +131,7 @@ include "../config.php"
                                 <div class="container">
                                     <div class="row justify-content-center">
                                         <div class="group col-sm-0">
-                                            &#10060; <strong style="color: red;"> Incorrect password </strong> &#10060;
+                                            &#10060; <strong style="color: red;"> <?php echo $challenge['incorrect'] ?> </strong> &#10060;
                                         </div>
                                     </div>
                                 </div>

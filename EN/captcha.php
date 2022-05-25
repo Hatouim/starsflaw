@@ -8,8 +8,8 @@ header("Pragma: no-cache");
   
 function _generateRandom($length=6)  
 {  
-    $_rand_src = array(  
-        array(48,57) //digits  
+    $_rand_src = array(
+      array(48,57) //digits  
         , array(97,122) //lowercase chars  
 //      , array(65,90) //uppercase chars  
     );  
